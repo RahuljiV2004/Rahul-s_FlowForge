@@ -1,0 +1,737 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #f3f4f6;
+  color: #000000;
+}
+
+.modal-icon {
+  width: 2rem;
+  height: 2rem;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.modal-description {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.modal-btn {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.modal-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+/* Homepage Styles */
+.homepage {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 80px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-logo {
+  width: 3rem;
+  height: 3rem;
+  background: #000000;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: -0.025em;
+}
+
+.create-stack-btn {
+  background: #10b981;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.create-stack-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 150px);
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.create-section {
+  background: #f8fafc;
+  border: 2px dashed #d1d5db;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 150px);
+  max-width: 500px;
+  text-align: center;
+}
+
+.create-icon {
+  width: 3rem;
+  height: 3rem;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.create-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.create-description {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.create-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+}
+
+.create-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.create-btn-large {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.create-btn-large:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.spinner {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== HOME PAGE DASHBOARD REDESIGN ===== */
+
+/* Small Create Box */
+.create-section-small {
+  background: #ffffff;
+  width: 260px;
+  height: 260px;
+  margin: 20px auto 40px auto;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.create-section-small h3 {
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+.create-input-small {
+  width: 80%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Green Button Standard */
+.green-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.green-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* Workflows Section */
+.workflows-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: #000000;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* 3 Cards Per Row Grid */
+.workflows-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Individual Card */
+.workflow-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.workflow-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h4 {
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+/* Action Buttons */
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  border: none;
+  background: #f3f4f6;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  background: #e5e7eb;
+}
+
+.icon-btn.delete {
+  background: #fee2e2;
+}
+
+.icon-btn.delete:hover {
+  background: #fecaca;
+}
+
+/* Description */
+.card-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 10px 0;
+  min-height: 40px;
+}
+
+/* Meta Info */
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+  color: #6b7280;
+}
+
+/* Status Tags */
+.active {
+  color: #059669;
+  font-weight: 600;
+}
+
+.inactive {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Open Button Full Width */
+.open-btn {
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  margin-top: 30px;
+  color: #6b7280;
+}
+
+/* Loading State Override */
+.loading-state p {
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .workflows-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .workflows-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .create-section-small {
+    width: 90%;
+  }
+}
+
+/* Rectangular Create Section */
+
+.create-rectangle {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+
+  padding: 24px 20px;
+  margin: 20px auto 40px auto;
+
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.create-heading {
+  color: #000000;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.create-text {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+/* ===== Workflow Editor Header (Matching Home Header) ===== */
+
+.editor-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 80px;
+}
+
+.editor-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+/* Left Section */
+
+.editor-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.editor-back-btn {
+  background: #f3f4f6;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.editor-back-btn:hover {
+  background: #e5e7eb;
+}
+
+.editor-brand-text h1 {
+  font-size: 1.4rem;
+  color: #000000;
+  margin: 0;
+}
+
+.editor-subtitle {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Right Controls */
+
+.editor-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.editor-input {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 200px;
+}
+
+.editor-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .editor-controls {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .editor-input {
+    width: 160px;
+  }
+}
+
+/* Make FlowForge clickable */
+.clickable-brand {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clickable-brand:hover h1 {
+  color: #10b981;
+}
+
+/* Push controls to extreme right */
+.editor-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+/* Ensure right section stays at far end */
+.editor-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* Make inputs slightly compact */
+.editor-input {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 200px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+  .editor-controls {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .editor-input {
+    width: 180px;
+  }
+}
+
+/* ===== Chat Header Matching Editor/Home Style ===== */
+
+.chat-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.chat-brand {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #000000;
+  transition: 0.2s;
+}
+
+.chat-subtitle {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.chat-brand:hover .chat-title {
+  color: #10b981;
+}

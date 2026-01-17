@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: flowforge_postgres
+    environment:
+      POSTGRES_USER: flowforge_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_123}
+      POSTGRES_DB: flowforge_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - flowforge_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowforge_user -d flowforge_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (Optional - for caching)
+  redis:
+    image: redis:7-alpine
+    container_name: flowforge_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - flowforge_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flowforge_backend
+    environment:
+      DATABASE_URL: postgresql://flowforge_user:${POSTGRES_PASSWORD:-secure_password_123}@postgres:5432/flowforge_db
+      REDIS_URL: redis://redis:6379/0
+      ENVIRONMENT: production
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:3000}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - flowforge_network
+    restart: unless-stopped
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/chroma_db:/app/chroma_db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flowforge_frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - flowforge_network
+    restart: unless-stopped
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro  # SSL certificates (if needed)
+
+  # Nginx Reverse Proxy (Optional - for production)
+  nginx:
+    image: nginx:alpine
+    container_name: flowforge_nginx
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro  # SSL certificates
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - flowforge_network
+    restart: unless-stopped
+    profiles:
+      - production  # Only start with --profile production
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  flowforge_network:
+    driver: bridge
