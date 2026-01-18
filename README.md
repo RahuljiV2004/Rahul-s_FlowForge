@@ -4,6 +4,9 @@ A comprehensive web application that enables users to visually create and intera
 
 ## 🎯 Features
 ![Home Diagram](assets/flowforge.png)
+![Workflow diagram](assets/Workflow_builder.png)
+![Chat Diagram](assets/chat.png)
+![Chat Diagram](assets/chat_1.png)
 ### Core Components
 
 1. **User Query Component** - Entry point for user queries
@@ -25,7 +28,7 @@ A comprehensive web application that enables users to visually create and intera
 
 ![Architecture Diagram](assets/Architecture.png)
 
-
+![Flow Diagram](assets/flow_rag.png)
 ## 📋 Prerequisites
 
 - Docker and Docker Compose
