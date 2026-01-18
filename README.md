@@ -28,7 +28,7 @@ A comprehensive web application that enables users to visually create and intera
 
 ![Architecture Diagram](assets/Architecture.png)
 
-![Flow Diagram](assets/flow_rag (2).png)
+![Flow Diagram](assets/flow_rag(2).png)
 ## 📋 Prerequisites
 
 - Docker and Docker Compose
