@@ -76,6 +76,7 @@ A comprehensive web application that enables users to visually create and intera
    GOOGLE_API_KEY=your_google_api_key_here
    SERPAPI_API_KEY=your_serpapi_key_here
    BRAVE_API_KEY=your_brave_api_key_here
+   COHERE_API_KEY=your_cohere_api_key_here
    ```
 
 3. **Start the application**
