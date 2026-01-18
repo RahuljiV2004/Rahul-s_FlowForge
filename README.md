@@ -3,7 +3,10 @@
 A comprehensive web application that enables users to visually create and interact with intelligent workflows. Build workflows by connecting components that handle user input, extract knowledge from documents, interact with language models, and return answers through a chat interface.
 
 ## 🎯 Features
-
+![Home Diagram](assets/flowforge.png)
+![Workflow diagram](assets/Workflow_builder.png)
+![Chat Diagram](assets/chat.png)
+![Chat Diagram](assets/chat_1.png)
 ### Core Components
 
 1. **User Query Component** - Entry point for user queries
@@ -23,27 +26,9 @@ A comprehensive web application that enables users to visually create and intera
 
 ## 🏗️ Architecture
 
-```
-┌─────────────┐
-│   Frontend  │  React.js + React Flow
-│  (Port 3000)│
-└──────┬──────┘
-       │
-       │ HTTP/REST
-       │
-┌──────▼──────┐
-│   Backend   │  FastAPI
-│  (Port 8000)│
-└──────┬──────┘
-       │
-       ├──────────┬──────────┬─────────────┐
-       │          │          │             │
-┌──────▼──┐ ┌─────▼────┐ ┌──▼────┐ ┌──────▼────┐
-│PostgreSQL│ │ ChromaDB │ │ OpenAI│ │  Gemini   │
-│          │ │          │ │  API  │ │   API     │
-└──────────┘ └──────────┘ └────────┘ └───────────┘
-```
+![Architecture Diagram](assets/Architecture.png)
 
+![Flow Diagram](assets/flow_rag.png)
 ## 📋 Prerequisites
 
 - Docker and Docker Compose
@@ -76,6 +61,7 @@ A comprehensive web application that enables users to visually create and intera
    GOOGLE_API_KEY=your_google_api_key_here
    SERPAPI_API_KEY=your_serpapi_key_here
    BRAVE_API_KEY=your_brave_api_key_here
+   COHERE_API_KEY=your_cohere_api_key_here
    ```
 
 3. **Start the application**
