@@ -3,7 +3,7 @@
 A comprehensive web application that enables users to visually create and interact with intelligent workflows. Build workflows by connecting components that handle user input, extract knowledge from documents, interact with language models, and return answers through a chat interface.
 
 ## 🎯 Features
-
+![Home Diagram](assets/floeforge.png)
 ### Core Components
 
 1. **User Query Component** - Entry point for user queries
